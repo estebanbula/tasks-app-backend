@@ -9,9 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Builder
-@Document
 @NoArgsConstructor
 @AllArgsConstructor
+@Document(collection = "task")
 public class TaskDocument {
 
     @Id
