@@ -31,4 +31,36 @@ public class TaskUseCaseImpl implements TaskUseCase {
     public Task saveTask(Task task) {
         return TaskMapper.toDomain(repository.save(TaskMapper.toDocument(task)));
     }
+
+    @Override
+    public Task deleteTask(String id) {
+        return repository.findById(id)
+                .map(currentTask -> {
+                    currentTask.setState("D");
+                    return currentTask;
+                })
+                .map(repository::save)
+                .map(TaskMapper::toDomain)
+                .orElseThrow();
+    }
+
+    @Override
+    public Task editTask(String id, Task task) {
+        return repository.findById(id)
+                .map(currentTask -> {
+                    currentTask.setTitle(task.getTitle());
+                    currentTask.setDetail(task.getDetail());
+                    return currentTask;
+                })
+                .map(repository::save)
+                .map(TaskMapper::toDomain)
+                .orElseThrow();
+    }
+
+    @Override
+    public Task getById(String id) {
+        return repository.findById(id)
+                .map(TaskMapper::toDomain)
+                .orElseThrow();
+    }
 }

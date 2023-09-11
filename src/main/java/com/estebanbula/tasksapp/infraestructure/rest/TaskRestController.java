@@ -22,8 +22,23 @@ public class TaskRestController {
         return new ResponseEntity<>(handler.retrieveTasksByState(state), HttpStatus.OK);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<Task> getTaskById(@PathVariable String id) {
+        return new ResponseEntity<>(handler.getTaskById(id), HttpStatus.OK);
+    }
+
     @PostMapping("")
     public ResponseEntity<Task> postTask(@RequestBody Task task) {
         return new ResponseEntity<>(handler.saveTask(task), HttpStatus.CREATED);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Task> editTask(@PathVariable String id, @RequestBody Task task) {
+        return new ResponseEntity<>(handler.editTask(id, task), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Task> deleteTask(@PathVariable String id) {
+        return new ResponseEntity<>(handler.deleteTask(id), HttpStatus.OK);
     }
 }

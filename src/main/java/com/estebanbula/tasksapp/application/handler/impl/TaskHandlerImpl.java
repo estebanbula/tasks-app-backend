@@ -25,4 +25,19 @@ public class TaskHandlerImpl implements TaskHandler {
     public Task saveTask(Task task) {
         return useCase.saveTask(task);
     }
+
+    @Override
+    public Task deleteTask(String id) {
+        return useCase.deleteTask(id);
+    }
+
+    @Override
+    public Task editTask(String id, Task task) {
+        return useCase.editTask(id, task);
+    }
+
+    @Override
+    public Task getTaskById(String id) {
+        return useCase.getById(id);
+    }
 }
